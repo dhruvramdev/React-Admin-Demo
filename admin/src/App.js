@@ -37,8 +37,8 @@ class App extends Component {
 
         return (
             <Admin dataProvider={dataProvider}>
-                <Resource name="Book" list={BookList} edit={BookEdit} create={BookCreate} />
-                <Resource name="Product" list={ProductList} edit={ProductEdit} create={ProductCreate} />
+                <Resource name="Product" list={BookList} edit={BookEdit} create={BookCreate} />
+                <Resource name="Seller" list={ProductList} edit={ProductEdit} create={ProductCreate} />
             </Admin>
         );
     }
