@@ -7,10 +7,11 @@ import { List, Datagrid, Edit, Create, SimpleForm, DateField, TextField, EditBut
 export const BookList = (props) => (
     <List {...props}>
         <Datagrid>
-            <TextField source="id" />
-            <TextField source="title" />
-            <TextField source="author" />
-            <TextField source="isbn" />
+            <TextField source="_id" />
+            <TextField source="name" />
+            <TextField source="image" />
+            <TextField source="description" />
+            <TextField source="price" />
             <EditButton />
         </Datagrid>
     </List>
@@ -23,20 +24,22 @@ const BookTitle = ({ record }) => {
 export const BookEdit = (props) => (
     <Edit title={<BookTitle />} {...props}>
         <SimpleForm>
-            <DisabledInput source="id" />
-            <TextInput source="title" />
-            <TextInput source="author"/>
-            <TextInput source="isbn"/>
+            <DisabledInput source="_id" />
+            <TextField source="name" />
+            <TextField source="image" />
+            <TextField source="description" />
+            <TextField source="price" />
         </SimpleForm>
     </Edit>
 );
 
 export const BookCreate = (props) => (
-    <Create title="Create a Book" {...props}>
+    <Create title="Add a product" {...props}>
         <SimpleForm>
-            <TextInput source="title" />
-            <TextInput source="author"/>
-            <TextInput source="isbn"/>
+            <TextField source="name" />
+            <TextField source="image" />
+            <TextField source="description" />
+            <TextField source="price" />
         </SimpleForm>
     </Create>
 );

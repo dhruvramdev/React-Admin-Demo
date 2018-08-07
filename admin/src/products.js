@@ -20,9 +20,10 @@ import {
 export const ProductList = (props) => (
     <List {...props}>
         <Datagrid>
-            <TextField source="id"/>
+            <TextField source="_id"/>
             <TextField source="name"/>
-            <TextField source="seller"/>
+            <TextField source="image"/>
+            <TextField source="about"/>
             <EditButton/>
         </Datagrid>
     </List>
@@ -36,8 +37,9 @@ export const ProductEdit = (props) => (
     <Edit title={<ProductTitle/>} {...props}>
         <SimpleForm>
             <DisabledInput source="id"/>
-            <TextInput source="name"/>
-            <TextInput source="seller"/>
+            <TextField source="name"/>
+            <TextField source="image"/>
+            <TextField source="about"/>
         </SimpleForm>
     </Edit>
 );
@@ -45,8 +47,9 @@ export const ProductEdit = (props) => (
 export const ProductCreate = (props) => (
     <Create title="Create a Product" {...props}>
         <SimpleForm>
-            <TextInput source="name"/>
-            <TextInput source="seller"/>
+        <TextField source="name"/>
+            <TextField source="image"/>
+            <TextField source="about"/>
         </SimpleForm>
     </Create>
 );

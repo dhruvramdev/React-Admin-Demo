@@ -1,21 +1,21 @@
-
 import gql from 'graphql-tag';
 
-const buildFieldsList = (fieldsArray => {
+const buildFieldsList = fieldsArray => {
     let temp ='' ;
     fieldsArray.map(field => {
         temp += `${field.name}, \n`
     })
     return temp ;
-
- })
+ }
 
 const queryBuilder = introspectionResults => ((raFetchType, resourceName, params) => {
     const resource = introspectionResults.types.find(r => r.name === resourceName);
 
-    console.log(introspectionResults);
-    console.log(raFetchType, resourceName, params);
-    console.log(resource);
+    console.log("IntrospectionResults", introspectionResults);
+    console.log("raFetchType", raFetchType);
+    console.log("resourceName", resourceName); 
+    console.log("params", params);
+    console.log("resource", resource);
 
     switch (raFetchType) {
         case 'GET_LIST':
@@ -29,8 +29,7 @@ const queryBuilder = introspectionResults => ((raFetchType, resourceName, params
                 `,
                 // variables: params,
                 parseResponse: (response) => {
-                    console.log(response);
-                    console.log(response.data);
+                    console.log("Response Data", response.data.data);
                     return { data : response.data.data , total : 5};
                 },
             };
