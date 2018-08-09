@@ -24,6 +24,13 @@ const queryBuilder = introspectionResults => (
         switch (raFetchType) {
             case 'GET_LIST':
                 return {
+                    // query: gql`
+                    //         query {
+                    //             data : all${resourceName}s {
+                    //                 ${buildFieldsList(resource.fields)}
+                    //             }
+                    //         }
+                    //     `,
                     query: gql`
                         query {
                             data : all${resourceName}s {
@@ -49,6 +56,13 @@ const queryBuilder = introspectionResults => (
 
             case 'GET_ONE':
                 return {
+                    // query: gql`
+                    //     query {
+                    //         data : ${resourceName}(id: ${params.id}) {
+                    //             ${buildFieldsList(resource.fields)}
+                    //         }
+                    //     }
+                    // `,
                     query: gql`
                         query {
                             data : ${resourceName}(id: "${params.id}") {
