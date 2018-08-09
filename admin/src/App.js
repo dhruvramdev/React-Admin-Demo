@@ -5,9 +5,7 @@ import buildGraphQLProvider from 'ra-data-graphql';
 import {Admin, Resource, Delete} from 'react-admin';
 
 import queryBuilder from './queryBuilder' ;
-import {BookCreate, BookEdit, BookList} from './books';
 import {ProductCreate, ProductEdit, ProductList} from "./products";
-// import {BookList} from './books';
 
 // console.log(queryBuilder());
 
@@ -37,8 +35,7 @@ class App extends Component {
 
         return (
             <Admin dataProvider={dataProvider}>
-                <Resource name="Product" list={BookList} edit={BookEdit} create={BookCreate} />
-                <Resource name="Seller" list={ProductList} edit={ProductEdit} create={ProductCreate} />
+                <Resource name="Product" list={ProductList} edit={ProductEdit} create={ProductCreate} />
             </Admin>
         );
     }
