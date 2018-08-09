@@ -6,7 +6,7 @@ module.exports = {
     Mutation: `
         addOrder(
             userID: ID!,
-            productID: ID!,
+            productIDs: [ID]!,
             discount: Int!,
             shipping: Int!
         ): Order,

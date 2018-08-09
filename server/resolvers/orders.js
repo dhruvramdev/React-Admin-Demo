@@ -14,7 +14,9 @@ module.exports = {
             )
         },
         Order: (parent, args, context, info) => {
-            return Order.findOne({_id: args.id}).populate({
+            return Order.findOne({
+                _id: args.id
+            }).populate({
                 path: 'product',
                 populate: {
                     path: 'seller'
@@ -27,30 +29,26 @@ module.exports = {
 
     Mutation: {
         addOrder: (parent, args, context, info) => {
-            return Product.findOne({_id: args.productID}).exec().then(
-                foundProduct => {
-                    return Order.create({
-                        discount: args.discount,
-                        shipping: args.shipping,
-                        user: args.userID
-                    }).then(
-                        createdOrder => {
-                            createdOrder.product = foundProduct;
-                            createdOrder.save();
-                            // Solve populate issue - seller
-                            return createdOrder
-                        }
-                    )
+            return Order.create({
+                discount: args.discount,
+                shipping: args.shipping,
+                user: args.userID
+            }).then(
+                createdOrder => {
+                    args.productIDs.forEach(function (id) {
+                        createdOrder.products.push(id);
+                    })
+                    createdOrder.save();
+                    return createdOrder.populate('products').populate('user').execPopulate().then(
+                        data => data
+                    );
                 }
             )
         },
         removeOrder: (parent, args, context, info) => {
-            return Order.findOneAndDelete({_id: args.orderID}).populate({
-                path: 'product',
-                populate: {
-                    path: 'seller'
-                }
-            }).exec().then(
+            return Order.findOneAndDelete({
+                _id: args.orderID
+            }).populate('products').populate('user').exec().then(
                 data => data
             );
         }

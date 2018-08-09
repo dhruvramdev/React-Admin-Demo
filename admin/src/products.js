@@ -1,4 +1,3 @@
-// in books.js
 import React from 'react';
 import {
     List,
@@ -12,7 +11,8 @@ import {
     DisabledInput,
     TextInput,
     LongTextInput,
-    DateInput
+    DateInput,
+    ReferenceField
 } from 'react-admin';
 // import PostI from '@material-ui/icons/Post';
 // export const ProductIcon = ProductIcon;
@@ -20,10 +20,12 @@ import {
 export const ProductList = (props) => (
     <List {...props}>
         <Datagrid>
-            <TextField source="_id"/>
+            <TextField source="id"/>
             <TextField source="name"/>
             <TextField source="image"/>
-            <TextField source="about"/>
+            <TextField source="description"/>
+            <TextField source="seller.name"/>
+            <TextField source="seller.id"/>
             <EditButton/>
         </Datagrid>
     </List>
@@ -37,9 +39,11 @@ export const ProductEdit = (props) => (
     <Edit title={<ProductTitle/>} {...props}>
         <SimpleForm>
             <DisabledInput source="id"/>
-            <TextField source="name"/>
-            <TextField source="image"/>
-            <TextField source="about"/>
+            <DisabledInput source="seller.id"/>
+            <TextInput source="name"/>
+            <TextInput source="image"/>
+            <TextInput source="description"/>
+            <TextInput source="seller.name"/>
         </SimpleForm>
     </Edit>
 );
