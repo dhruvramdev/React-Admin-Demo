@@ -5,56 +5,77 @@ const buildFieldsList = fieldsArray => {
     fieldsArray.map(field => {
         temp += `${field.name}, \n`
     })
+    console.log('Query',temp);
     return temp ;
  }
 
-const queryBuilder = introspectionResults => ((raFetchType, resourceName, params) => {
-    const resource = introspectionResults.types.find(r => r.name === resourceName);
+const queryBuilder = introspectionResults => (
+    
+    (raFetchType, resourceName, params) => {
 
-    console.log("IntrospectionResults", introspectionResults);
-    console.log("raFetchType", raFetchType);
-    console.log("resourceName", resourceName); 
-    console.log("params", params);
-    console.log("resource", resource);
+        const resource = introspectionResults.types.find(r => r.name === resourceName);
 
-    switch (raFetchType) {
-        case 'GET_LIST':
-            return {
-                query: gql`
-                    query {
-                        data : all${resourceName}s {
-                            ${buildFieldsList(resource.fields)}
+        console.log("IntrospectionResults", introspectionResults);
+        console.log("raFetchType", raFetchType);
+        console.log("resourceName", resourceName); 
+        console.log("params", params);
+        console.log("resource", resource);
+
+        switch (raFetchType) {
+            case 'GET_LIST':
+                return {
+                    query: gql`
+                        query {
+                            data : all${resourceName}s {
+                                id, 
+                                name, 
+                                price, 
+                                image, 
+                                description, 
+                                seller {
+                                    name,
+                                    id
+                                }
+                            }
                         }
-                    }
-                `,
-                // variables: params,
-                parseResponse: (response) => {
-                    console.log("Response Data", response.data.data);
-                    return { data : response.data.data , total : 5};
-                },
-            };
-            break;
+                    `,
+                    // variables: params,
+                    parseResponse: (response) => {
+                        console.log("Response Data", response.data.data);
+                        return { data : response.data.data , total : 5};
+                    },
+                };
+                break;
 
-        case 'GET_ONE':
-            return {
-                query: gql`
-                    query {
-                        data : ${resourceName}(id: ${params.id}) {
-                            ${buildFieldsList(resource.fields)}
+            case 'GET_ONE':
+                return {
+                    query: gql`
+                        query {
+                            data : ${resourceName}(id: "${params.id}") {
+                                id, 
+                                name, 
+                                price, 
+                                image, 
+                                description, 
+                                seller {
+                                    name,
+                                    id
+                                }
+                            }
                         }
-                    }
-                `,
-                // variables: params,
-                parseResponse: (response) => {
-                    console.log(response);
-                    console.log(response.data);
-                    return { data : response.data.data};
-                },
-            }
+                    `,
+                    // variables: params,
+                    parseResponse: (response) => {
+                        console.log(response);
+                        console.log(response.data);
+                        return { data : response.data.data};
+                    },
+                }
 
 
-    // ... other types handled here
+        // ... other types handled here
+        }
     }
-});
+);
 
 export default queryBuilder;
