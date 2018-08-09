@@ -24,8 +24,11 @@ export const ProductList = (props) => (
             <TextField source="name"/>
             <TextField source="image"/>
             <TextField source="description"/>
-            <TextField source="seller.name"/>
-            <TextField source="seller.id"/>
+            {/*<TextField source="seller.name"/>*/}
+            <ReferenceField label="Seller" source="seller.id" reference="Seller">
+                <TextField source="name" />
+            </ReferenceField>
+            {/*<TextField source="seller.id"/>*/}
             <EditButton/>
         </Datagrid>
     </List>

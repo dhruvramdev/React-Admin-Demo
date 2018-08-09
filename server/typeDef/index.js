@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { gql } = require('apollo-server');
+const {gql} = require('apollo-server');
 
 const products = require('./products');
 const sellers = require('./sellers');
@@ -20,7 +20,7 @@ const typeDefs = gql`
         ${orders.Mutation},
         ${users.Mutation}
     }
-    
+
     type Product {
         id: ID,
         name: String,

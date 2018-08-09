@@ -1,7 +1,8 @@
 module.exports = {
     Query: `
         allSellers: [Seller],
-        Seller(id: ID!): Seller
+        Seller(id: ID!): Seller,
+        getSellers(ids : [ID]): [Seller]
     `,
     Mutation: `
         addSeller(

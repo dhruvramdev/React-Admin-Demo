@@ -13,6 +13,11 @@ module.exports = {
             return Seller.findById(args.id).exec().then(
                 data => data
             )
+        } ,
+        getSellers: (parent , args, context, info) => {
+            return Seller.find({
+                '_id' : { $in : args.ids }
+            }).exec().then(data => data);
         }
     },
 

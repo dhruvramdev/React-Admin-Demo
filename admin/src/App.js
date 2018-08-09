@@ -6,6 +6,7 @@ import {Admin, Resource, Delete} from 'react-admin';
 
 import queryBuilder from './queryBuilder' ;
 import {ProductCreate, ProductEdit, ProductList} from "./products";
+import {BookList} from "./books";
 
 // console.log(queryBuilder());
 
@@ -22,7 +23,7 @@ class App extends Component {
     componentDidMount() {
         buildGraphQLProvider({
             client,
-            buildQuery : queryBuilder
+            buildQuery: queryBuilder
         }).then(dataProvider => this.setState({dataProvider}));
     }
 
@@ -35,7 +36,8 @@ class App extends Component {
 
         return (
             <Admin dataProvider={dataProvider}>
-                <Resource name="Product" list={ProductList} edit={ProductEdit} create={ProductCreate} />
+                <Resource name="Product" list={ProductList} edit={ProductEdit} create={ProductCreate}/>
+                <Resource name="Seller" list={BookList}/>
             </Admin>
         );
     }
